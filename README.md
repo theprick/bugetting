@@ -46,6 +46,6 @@ Framework references: [Next.js installation](https://nextjs.org/docs/app/getting
 
 ## Automated checks
 
-GitHub Actions runs lint, type checking, Vitest and a production build on PRs and pushes to main using `npm ci`. No database credentials are required. Tests belong alongside the pure financial code as `src/**/*.test.ts`; `npm run test:watch` runs them interactively. The empty skeleton temporarily permits no tests; remove that setting when the first financial tests land. Failed checks fail CI. Branch protection, if desired, must separately require the Checks job before merging.
+GitHub Actions runs lint, type checking, Vitest and a production build on PRs and pushes to main using `npm ci`. No database credentials are required. Tests belong alongside the pure financial code as `src/**/*.test.ts`; `npm run test:watch` runs them interactively. An empty or failing test suite fails CI. Branch protection, if desired, must separately require the Checks job before merging.
 
 The dependency audit is documented in [docs/dependencies.md](docs/dependencies.md).
