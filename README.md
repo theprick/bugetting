@@ -4,9 +4,10 @@ A personal cash-flow planner for consultants managing salary, dividends and hous
 
 ## Run locally
 
-Use Node.js 22.13+ (or a newer supported LTS) and npm.
+Use Node.js 22.13+ within the Node 22 LTS line and npm. CI reads `.nvmrc` too.
 
 With nvm, `nvm install` selects the latest Node 22 release using `.nvmrc`.
+On this Mac, the updated Homebrew runtime can also be selected for the current shell with `export PATH="/opt/homebrew/opt/node@22/bin:$PATH"`.
 
 ```sh
 npm ci
@@ -17,6 +18,7 @@ Open http://localhost:3000. The skeleton runs without a database or environment 
 
 ```sh
 npm run check
+npm test
 npm run build
 npm start
 ```
@@ -42,8 +44,8 @@ Navigation and empty states only. No financial calculations, data entry, imports
 
 Framework references: [Next.js installation](https://nextjs.org/docs/app/getting-started/installation) and [Supabase server-side authentication](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
 
-## Initial verification notes
+## Automated checks
 
-Lint, TypeScript checks and the production build passed with the installed Node 22.2.0. Use Node 22.13+ for the supported engine range of the lint tooling.
+GitHub Actions runs lint, type checking, Vitest and a production build on PRs and pushes to main using `npm ci`. No database credentials are required. Tests belong alongside the pure financial code as `src/**/*.test.ts`; `npm run test:watch` runs them interactively. The empty skeleton temporarily permits no tests; remove that setting when the first financial tests land. Failed checks fail CI. Branch protection, if desired, must separately require the Checks job before merging.
 
-The initial npm audit reports 16 moderate findings propagated from a `minimatch` advisory in development-only lint dependencies. The application runtime dependency tree is unaffected by these findings. npm's suggested major downgrades were not applied; review compatible upstream lint dependency updates before establishing CI.
+The dependency audit is documented in [docs/dependencies.md](docs/dependencies.md).
